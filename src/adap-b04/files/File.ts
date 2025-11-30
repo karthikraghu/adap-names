@@ -1,6 +1,7 @@
 import { Node } from "./Node";
 import { Directory } from "./Directory";
 import { MethodFailedException } from "../common/MethodFailedException";
+import { IllegalArgumentException } from "../common/IllegalArgumentException";
 
 enum FileState {
     OPEN,
@@ -21,6 +22,7 @@ export class File extends Node {
     }
 
     public read(noBytes: number): Int8Array {
+        IllegalArgumentException.assert(noBytes >= 0, "Number of bytes must be non-negative");
         // read something
         return new Int8Array();
     }

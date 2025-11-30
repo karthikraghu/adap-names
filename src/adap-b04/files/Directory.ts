@@ -1,4 +1,5 @@
 import { Node } from "./Node";
+import { IllegalArgumentException } from "../common/IllegalArgumentException";
 
 export class Directory extends Node {
 
@@ -13,10 +14,12 @@ export class Directory extends Node {
     }
 
     public addChildNode(cn: Node): void {
+        IllegalArgumentException.assert(cn != null, "Child node must not be null");
         this.childNodes.add(cn);
     }
 
     public removeChildNode(cn: Node): void {
+        IllegalArgumentException.assert(cn != null, "Child node must not be null");
         this.childNodes.delete(cn); // Yikes! Should have been called remove
     }
 
