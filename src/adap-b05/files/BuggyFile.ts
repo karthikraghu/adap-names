@@ -1,5 +1,6 @@
 import { File } from "./File";
 import { Directory } from "./Directory";
+import { InvalidStateException } from "../common/InvalidStateException";
 
 export class BuggyFile extends File {
 
@@ -13,7 +14,12 @@ export class BuggyFile extends File {
      */
     protected doGetBaseName(): string {
         this.baseName = "";
-        return super.doGetBaseName();
+        const result = super.doGetBaseName();
+        
+        // Throw exception if basename is corrupted (empty)
+        InvalidStateException.assert(result !== "", "Invalid state: basename is empty");
+        
+        return result;
     }
 
 }
